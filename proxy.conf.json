@@ -1,0 +1,7 @@
+{
+  "/": {
+    "target": "https://bsm.canalbarge.com",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
