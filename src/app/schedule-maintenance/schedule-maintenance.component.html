@@ -2,26 +2,19 @@
   <div class="title">
     <h1>Maintenance Scheduling</h1>
   </div>
-
   <form #mainForm="ngForm" (ngSubmit)="scheduleMaintenance()" >
-
     <div class="row g-3">
       <div class="col-sm-3">
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Select a Asset Id
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ selectedAssetId ? selectedAssetId : 'Select an Asset Id' }}
           </button>
-
-          <select name="assetId" id="sekect" [(ngModel)]="selectedAssetId" required  style="background-color: transparent">
-            <option>-- Select --</option>
-            <option *ngFor="let data of assetIds" [value]="data">{{ data }}</option>
-          </select>
           <ul class="dropdown-menu">
-            <li *ngFor="let data of assetIds" [value]="data">{{ data }}>
+            <li *ngFor="let data of assetIds">
+              <a class="dropdown-item" (click)="selectAssetId(data)">{{ data }}</a>
+            </li>
           </ul>
         </div>
-
-
       </div>
       <div class="col-sm">
         <label>Select Start Date:</label>

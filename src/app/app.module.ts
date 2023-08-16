@@ -5,7 +5,7 @@ import {Router, RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormGroup, FormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import { ScheduleMaintenanceComponent } from './schedule-maintenance/schedule-maintenance.component';
 import { ChangeAssetStatusComponent } from './change-asset-status/change-asset-status.component';

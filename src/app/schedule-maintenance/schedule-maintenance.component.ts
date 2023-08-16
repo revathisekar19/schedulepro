@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import {DatePipe} from "@angular/common";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-schedule-maintenance',
@@ -11,8 +12,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class ScheduleMaintenanceComponent implements OnInit {
-  title = 'schedulepro';
-  //selectedAssetId: any
   assetIds: any;
   selectedAssetId: any;
   startDate: any;
@@ -27,15 +26,13 @@ export class ScheduleMaintenanceComponent implements OnInit {
   ngOnInit() {
     this.getAssetIds();
   }
-
+  selectAssetId(assetId: string) {
+    this.selectedAssetId = assetId;
+  }
   getAssetIds() {
     this.apiservice.getAssetId().subscribe(
       (data: any) => {
         this.assetIds = data;
-        console.log(this.assetIds);
-      },
-      (error) => {
-        console.error('Error fetching asset IDs:', error);
       }
     );
   }
@@ -56,19 +53,5 @@ export class ScheduleMaintenanceComponent implements OnInit {
           console.error('Error scheduling maintenance:', error);
         }
       );
-  }
-
-  changeAssetStatus(active: boolean) {
-    const assetId = this.selectedAssetId;
-    this.apiservice.changeAssetStatus(assetId, active).subscribe(
-      (res) => {
-        alert('Asset status changed successfully');
-        console.log('Asset status changed successfully',res);
-      },
-      (error) => {
-        alert('Error changing asset status')
-        console.error('Error changing asset status', error);
-      }
-    );
   }
 }
