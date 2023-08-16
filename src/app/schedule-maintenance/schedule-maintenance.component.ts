@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './api.service';
+import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import {DatePipe} from "@angular/common";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-schedule-maintenance',
+  templateUrl: './schedule-maintenance.component.html',
+  styleUrls: ['./schedule-maintenance.component.css']
 })
-export class AppComponent implements OnInit {
+
+export class ScheduleMaintenanceComponent implements OnInit {
   title = 'schedulepro';
   //selectedAssetId: any
   assetIds: any;

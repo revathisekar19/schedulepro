@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="title">
+    <h1>Maintenance Scheduling</h1>
+  </div>
+
+  <form #mainForm="ngForm" (ngSubmit)="scheduleMaintenance()" >
+
+    <div class="row g-3">
+      <div class="col-sm-3">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Select a Asset Id
+          </button>
+
+          <select name="assetId" id="sekect" [(ngModel)]="selectedAssetId" required  style="background-color: transparent">
+            <option>-- Select --</option>
+            <option *ngFor="let data of assetIds" [value]="data">{{ data }}</option>
+          </select>
+          <ul class="dropdown-menu">
+            <li *ngFor="let data of assetIds" [value]="data">{{ data }}>
+          </ul>
+        </div>
+
+
+      </div>
+      <div class="col-sm">
+        <label>Select Start Date:</label>
+        <input type="date" name="startDate" id="startDate" [(ngModel)]="startDate" [min]="currentDate | date:'yyyy-MM-dd'"
+               required>
+      </div>
+      <div class="col-sm">
+        <label>Select End Date:</label>
+        <input type="date" name="stopDate" id="stopDate" [(ngModel)]="stopDate" [min]="currentDate | date:'yyyy-MM-dd'"
+               required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" id="sub">Submit</button>
+    <button type="reset" class="btn btn-secondary" id="res">Reset</button>
+  </form>
+</div>

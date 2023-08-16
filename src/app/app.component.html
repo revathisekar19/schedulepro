@@ -1,32 +1,15 @@
 
-<div class="container">
-  <div class="title">
-  <h1>Maintenance Scheduling</h1>
-  </div>
-  <div class="mainform">
-    <form #mainForm="ngForm" (ngSubmit)="scheduleMaintenance()" style="text-align: center">
-    <label class="form-label">Select AssetID : </label>
-    <select name="assetId" [(ngModel)]="selectedAssetId" required  id="select" style="background-color: transparent">
-      <option>-- Select --</option>
-      <option *ngFor="let data of assetIds" [value]="data">{{ data }}</option>
-    </select>
-    <br><br>
-    <label class="form-label">Select Start Date :</label>
-    <input type="date"  name="startDate" id="startDate" [(ngModel)]="startDate" [min]="currentDate | date:'yyyy-MM-dd'" required >
-    <br><br>
-    <label class="form-label">Select End Date : </label>
-    <input type="date"  name="stopDate" id="stopDate" [(ngModel)]="stopDate" [min]="currentDate | date:'yyyy-MM-dd'" required>
-    <br><br>
-    <button type="submit" class="btn" id="sub">Submit</button>
-    <button type="reset" class="btn" id="res">Reset</button>
-  </form>
-<!--    <div class="change" style="text-align: center">-->
-<!--      <button (click)="changeAssetStatus(true)" class="btn-primary" id="activateBtn">Activate Asset</button>-->
-<!--      <button (click)="changeAssetStatus(false)" class="btn-danger" id="deactivateBtn">Deactivate Asset</button>-->
-<!--    </div>-->
-    <div class="change" style="text-align: center">
-      <button (click)="changeAssetStatus(true)" class="btn-primary" id="cha" name="activated">Activate</button>
-      <button (click)="changeAssetStatus(false)" class="btn-primary" id="cha1" name="deactivated">Deactivate</button>
-    </div>
-</div>
-</div>
+
+<h1>Boat System Monitoring</h1>
+
+<!--<app-schedule-maintenance></app-schedule-maintenance>-->
+<!--<app-change-asset-status></app-change-asset-status>-->
+
+
+
+<nav>
+  <a class="button" routerLink="/asset-maintenance">Schedule Maintenance</a> |
+  <a class="button" routerLink="/change-asset-status">Change Asset Status</a>
+</nav>
+
+<router-outlet></router-outlet>

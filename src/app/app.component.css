@@ -1,61 +1,61 @@
-@import "~bootstrap/dist/css/bootstrap.css";
-.container{
-  background-image: radial-gradient(circle, #f0f6f5, #e5f5f4, #daf5f3, #cef4f4, #c1f3f6,
-  #b8f0f4, #afedf1, #a5eaef, #9de4e7, #96dfdf, #8ed9d7, #87d3cf);
-  border-radius: 10px; margin-top: 50px;
-}
-.form-label{
-  font-size: large;
-}
-h1{
-  font-size: xxx-large;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-.title{
-text-align: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-#sub , #res , #cha,#cha1{
-  padding: 15px;
-  cursor: pointer;
-  background-color: #ff5361;
-  /*background-color: #87D3CF;*/
-  color: #fff;
-  font-size: 18px;
-  outline: none;
-  border: 0;
-  width: 150px;
-  margin: 20px auto 0;
-  border-radius: 30px;
-}
-#sub{
-  margin-right: 20px;
-}
+/*@import "~bootstrap/dist/css/bootstrap.css";*/
+/*.container{*/
+/*  background-image: radial-gradient(circle, #f0f6f5, #e5f5f4, #daf5f3, #cef4f4, #c1f3f6,*/
+/*  #b8f0f4, #afedf1, #a5eaef, #9de4e7, #96dfdf, #8ed9d7, #87d3cf);*/
+/*  border-radius: 10px; margin-top: 50px;*/
+/*}*/
+/*.form-label{*/
+/*  font-size: large;*/
+/*}*/
+/*h1{*/
+/*  font-size: xxx-large;*/
+/*  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);*/
+/*}*/
+/*.title{*/
+/*text-align: center;*/
+/*  padding-top: 30px;*/
+/*  padding-bottom: 30px;*/
+/*}*/
+/*#sub , #res , #cha,#cha1{*/
+/*  padding: 15px;*/
+/*  cursor: pointer;*/
+/*  background-color: #ff5361;*/
+/*  !*background-color: #87D3CF;*!*/
+/*  color: #fff;*/
+/*  font-size: 18px;*/
+/*  outline: none;*/
+/*  border: 0;*/
+/*  width: 150px;*/
+/*  margin: 20px auto 0;*/
+/*  border-radius: 30px;*/
+/*}*/
+/*#sub{*/
+/*  margin-right: 20px;*/
+/*}*/
 
-#cha1{margin-left: 20px;}
-#sub:hover{color: black;}
-#res:hover{color: black;}
-#cha:hover{color: black;}
-#cha1:hover{color: black;}
-.change{
-  text-align: center;
-  padding-bottom: 50px;
-}
-form input{
-  margin-left: 10px;
-  padding: 10px;
-  font-size: 16px;
-  background: transparent;
-}
-#select{
-  /*border-style: none;*/
-  margin-left: 10px;
-  padding-left: 50px;
-  border-radius: 30px;
-}
-#startDate,#stopDate{
-  border-radius: 30px;
-  border-color: white;
-}
+/*#cha1{margin-left: 20px;}*/
+/*#sub:hover{color: black;}*/
+/*#res:hover{color: black;}*/
+/*#cha:hover{color: black;}*/
+/*#cha1:hover{color: black;}*/
+/*.change{*/
+/*  text-align: center;*/
+/*  padding-bottom: 50px;*/
+/*}*/
+/*form input{*/
+/*  margin-left: 10px;*/
+/*  padding: 10px;*/
+/*  font-size: 16px;*/
+/*  background: transparent;*/
+/*}*/
+/*#select{*/
+/*  !*border-style: none;*!*/
+/*  margin-left: 10px;*/
+/*  padding-left: 50px;*/
+/*  border-radius: 30px;*/
+/*}*/
+/*#startDate,#stopDate{*/
+/*  border-radius: 30px;*/
+/*  border-color: white;*/
+/*}*/
 
