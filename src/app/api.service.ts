@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders,HttpParams } from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -28,13 +29,14 @@ export class ApiService {
   }
 
 
-  changeAssetStatus(assetId: number, active: boolean){
+  changeAssetStatus(assetId: number, active: boolean):Observable<any>{
     const apiUrl = `asset/set-asset-status/${assetId}`;
+    const params = new HttpParams().set('active', active.toString());
     // const params = { active: active.toString() };
     // const requestBody = { isActive: active };
     const headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
     });
-    return this.http.post(`${apiUrl}?active=${active}`, {}, { headers });
+    return this.http.post(`${apiUrl}?active=${active}`, {}, { params,headers });
   }
 }

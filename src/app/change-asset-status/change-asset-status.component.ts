@@ -7,7 +7,7 @@ import {ApiService} from "../api.service";
   styleUrls: ['./change-asset-status.component.css']
 })
 export class ChangeAssetStatusComponent implements OnInit{
-
+  // assetID: number[] = []
   assetID : any;
   selectedAssetId : any;
   assetStatus: boolean = true;
@@ -25,17 +25,32 @@ constructor(private apiservice : ApiService) {}
   }
 
   changeAssetStatus() {
-    const assetId = this.selectedAssetId;
-    const active=this.assetStatus;
-    this.apiservice.changeAssetStatus(assetId,active).subscribe(
-      (res) => {
-          alert("Success");
-          console.log(res);
+    // const assetId = this.selectedAssetId;
+    // const active=this.assetStatus;
+    if(this.selectedAssetId !== null){
+      this.apiservice.changeAssetStatus(this.selectedAssetId,this.assetStatus).subscribe(
+      (res:any) => {
+        // this.assetID = Response.map(data => data.assetId);
+        alert("Success");
+        console.log(res);
       },
       (error) => {
         alert('Error changing asset status')
         console.error('Error changing asset status', error);
       }
     );
+    }else {
+      console.warn('Please select an asset before submitting.');
+    }
+    // this.apiservice.changeAssetStatus(this.selectedAssetId,this.assetStatus).subscribe(
+    //   (res) => {
+    //       alert("Success");
+    //       console.log(res);
+    //   },
+    //   (error) => {
+    //     alert('Error changing asset status')
+    //     console.error('Error changing asset status', error);
+    //   }
+    // );
   }
 }
