@@ -18,7 +18,6 @@ export class ScheduleMaintenanceComponent implements OnInit {
   stopDate: any;
   assetID: any;
   currentDate = new Date();
-
   constructor(private apiservice: ApiService, private http: HttpClient,private datePipe : DatePipe,private modalService: NgbModal) {
     this.scheduleMaintenance();
   }
@@ -40,14 +39,14 @@ export class ScheduleMaintenanceComponent implements OnInit {
   scheduleMaintenance() {
     const maintenanceDetails = {
       assetId: this.selectedAssetId,
-      startDate: this.datePipe.transform(this.startDate,'yyyy-MM-dd'),
-      stopDate: this.datePipe.transform(this.stopDate,'yyyy-MM-dd')
+      startDate: this.datePipe.transform(this.startDate, 'yyyy-MM-dd'),
+      stopDate: this.datePipe.transform(this.stopDate, 'yyyy-MM-dd')
     };
 
     this.apiservice.scheduleMaintenance(maintenanceDetails)
       .subscribe(
         (res) => {
-          console.log('Maintenance scheduled successfully.',res);
+          console.log('Maintenance scheduled successfully.', res);
         },
         (error) => {
           console.error('Error scheduling maintenance:', error);
@@ -55,3 +54,4 @@ export class ScheduleMaintenanceComponent implements OnInit {
       );
   }
 }
+
