@@ -32,11 +32,12 @@ export class ApiService {
   changeAssetStatus(assetId: number, active: boolean):Observable<any>{
     const apiUrl = `asset/set-asset-status/${assetId}`;
     const params = new HttpParams().set('active', active.toString());
-    // const params = { active: active.toString() };
+    //const params = { active: active.toString() };
     // const requestBody = { isActive: active };
     const headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
     });
-    return this.http.post(`${apiUrl}?active=${active}`, {}, { params,headers });
+    return this.http.post(apiUrl, null, { params,headers });
   }
 }
+// return this.http.post(`${apiUrl}?active=${active}`, {}, { params,headers });

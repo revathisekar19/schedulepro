@@ -7,17 +7,19 @@ import {ApiService} from "../api.service";
   styleUrls: ['./change-asset-status.component.css']
 })
 export class ChangeAssetStatusComponent implements OnInit{
-  // assetID: number[] = []
-  assetID : any;
+  assetID: number[] = [];
   selectedAssetId : any;
   assetStatus: boolean = true;
 
 constructor(private apiservice : ApiService) {}
   ngOnInit() {
-  this.fetchAssetsId();
+    console.log("Selected Asset ID:", this.selectedAssetId);
+
+    this.fetchAssetsId();
   }
   fetchAssetsId(){
-  this.apiservice.getAssetId().subscribe((data)=>{
+  this.apiservice.getAssetId().subscribe((data:any)=>{
+    console.log(data);
     this.assetID = data;
   },error => {
     console.error("Error Fetching AssetID",error)
@@ -25,12 +27,14 @@ constructor(private apiservice : ApiService) {}
   }
 
   changeAssetStatus() {
-    // const assetId = this.selectedAssetId;
-    // const active=this.assetStatus;
+
+    const assetId = this.selectedAssetId;
+    const active=this.assetStatus;
+    console.log("Selected Asset ID:", this.selectedAssetId);
     if(this.selectedAssetId !== null){
-      this.apiservice.changeAssetStatus(this.selectedAssetId,this.assetStatus).subscribe(
-      (res:any) => {
-        // this.assetID = Response.map(data => data.assetId);
+      this.apiservice.changeAssetStatus(assetId,active).subscribe(
+      (res) => {
+        // this.assetID = res.map(data => data.assetId);
         alert("Success");
         console.log(res);
       },
@@ -42,15 +46,5 @@ constructor(private apiservice : ApiService) {}
     }else {
       console.warn('Please select an asset before submitting.');
     }
-    // this.apiservice.changeAssetStatus(this.selectedAssetId,this.assetStatus).subscribe(
-    //   (res) => {
-    //       alert("Success");
-    //       console.log(res);
-    //   },
-    //   (error) => {
-    //     alert('Error changing asset status')
-    //     console.error('Error changing asset status', error);
-    //   }
-    // );
   }
 }
