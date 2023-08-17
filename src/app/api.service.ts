@@ -18,7 +18,7 @@ export class ApiService {
     });
     return this.http.get(this.basegetUrl, { headers });
   }
-  scheduleMaintenance(maintenanceDetails: any) {
+  scheduleMaintenance(maintenanceDetails: any) :Observable<any>{
     const baseUrl = `/asset/maintenance/${maintenanceDetails.assetId}/${maintenanceDetails.startDate}/${maintenanceDetails.stopDate}`;
 
     const headers = new HttpHeaders({

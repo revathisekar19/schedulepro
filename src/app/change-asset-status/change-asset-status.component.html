@@ -4,7 +4,7 @@
   </div>
   <form>
     <label for="assetID"> Asset ID : </label>
-    <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedAssetId" id="assetID">
+    <select class="form-select" aria-label="Default select example" [(ngModel)]="selectedAssetId" id="assetID" name="selectasset">
         <option selected value=""> --Select asset-- </option>
       <option *ngFor="let data of assetID" [value]="data">{{data}}</option>
     </select>

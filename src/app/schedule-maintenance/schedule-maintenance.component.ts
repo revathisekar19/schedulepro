@@ -1,3 +1,5 @@
+// noinspection JSDeprecatedSymbols
+
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
@@ -35,14 +37,12 @@ export class ScheduleMaintenanceComponent implements OnInit {
       }
     );
   }
-
   scheduleMaintenance() {
     const maintenanceDetails = {
       assetId: this.selectedAssetId,
       startDate: this.datePipe.transform(this.startDate, 'yyyy-MM-dd'),
       stopDate: this.datePipe.transform(this.stopDate, 'yyyy-MM-dd')
     };
-
     this.apiservice.scheduleMaintenance(maintenanceDetails)
       .subscribe(
         (res) => {
