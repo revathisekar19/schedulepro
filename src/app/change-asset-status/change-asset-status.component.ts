@@ -9,25 +9,25 @@ export interface AssetStatus {
   assetName: string;
   status: boolean;
 }
-const ELEMENT_DATA: AssetStatus[] = [{assetId: 1300155, assetName: 'MV Heavy Lane', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-];
+// const ELEMENT_DATA: AssetStatus[] = [{assetId: 1300155, assetName: 'MV Heavy Lane', status: true}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+// ];
 
 @Component({
   selector: 'app-change-asset-status',
@@ -39,8 +39,9 @@ const ELEMENT_DATA: AssetStatus[] = [{assetId: 1300155, assetName: 'MV Heavy Lan
 export class ChangeAssetStatusComponent implements OnInit {
 
   displayedColumns: string[] = ['assetId', 'assetName', 'status'];
-  dataSource = ELEMENT_DATA;
+  // dataSource = ELEMENT_DATA;
   assetID: number[] = [];
+  dataSource : number[]=[];
   selectedAssetId: any;
   assetStatus: boolean = true;
 
@@ -54,6 +55,7 @@ export class ChangeAssetStatusComponent implements OnInit {
   fetchAssetsId() {
     this.apiservice.getAssetId().subscribe((data: any) => {
       console.log(data);
+      this.dataSource = data;
       this.assetID = data;
     }, error => {
       console.error("Error Fetching AssetID", error)
