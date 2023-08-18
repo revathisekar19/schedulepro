@@ -9,8 +9,8 @@
   <section>
     <mat-form-field>
       <mat-label>Select an asset</mat-label>
-      <mat-select required [(ngModel)]="selectedAsset" name="food">
-        <mat-option *ngFor="let asset of assets" [value]="asset.assetName">
+      <mat-select required [(ngModel)]="selectedAsset" name="food" (selectionChange)="onAssetSelected()">
+        <mat-option *ngFor="let asset of assetIds" [value]="asset.assetName">
           {{asset.assetName}}
         </mat-option>
       </mat-select>
@@ -19,13 +19,13 @@
     <mat-form-field>
       <mat-label>Select Maintenance Date</mat-label>
       <mat-date-range-input required [formGroup]="range" [rangePicker]="picker">
-        <input matStartDate formControlName="start" placeholder="Start date">
-        <input matEndDate formControlName="end" placeholder="End date">
+        <input matStartDate formControlName="start" placeholder="Start date" value="start">
+        <input matEndDate formControlName="end" placeholder="End date" value="end">
       </mat-date-range-input>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
       <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid End date</mat-error>
     </mat-form-field>
 
   </section>

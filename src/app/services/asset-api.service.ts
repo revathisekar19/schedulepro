@@ -7,7 +7,7 @@ import {AssetStatus} from "../change-asset-status/change-asset-status.component"
   providedIn: 'root'
 })
 export class AssetApiService {
-  private baseUrl = '/api/v1/assetStatus';
+  private baseUrl = '/api/v1/assets-status';
   private username = 'bsmuser';
   private password = 'test';
   private secretToken = 'aRJSb9s2lr24jYnjQAVj';
@@ -19,7 +19,7 @@ export class AssetApiService {
     const headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
     });
-    return this.http.get(this.baseUrl, {headers});
+    return this.http.get<AssetStatus[]>(this.baseUrl, {headers});
   }
 
   getAllAssetStatus() {
@@ -30,7 +30,7 @@ export class AssetApiService {
   }
 
   scheduleMaintenance(maintenanceDetails: any) {
-    const baseUrl = `/asset/maintenance/${maintenanceDetails.assetId}/${maintenanceDetails.startDate}/${maintenanceDetails.stopDate}`;
+    const baseUrl = `/api/v1/maintenance/${maintenanceDetails.assetIds}/${maintenanceDetails.startDate}/${maintenanceDetails.endDate}`;
 
     const headers = new HttpHeaders({
       'secretToken': this.secretToken,
@@ -42,7 +42,7 @@ export class AssetApiService {
 
 
   changeAssetStatus(assetId: number, active: boolean): Observable<any> {
-    const apiUrl = `asset/set-asset-status/${assetId}`;
+    const apiUrl = `/api/v1/set-asset-status/${assetId}`;
     const params = new HttpParams().set('active', active.toString());
     const headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)

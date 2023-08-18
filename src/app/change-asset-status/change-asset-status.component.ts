@@ -9,7 +9,6 @@ export interface AssetStatus {
   assetName: string;
   status: boolean;
 }
-
 const ELEMENT_DATA: AssetStatus[] = [{assetId: 1300155, assetName: 'MV Heavy Lane', status: true}
   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
@@ -49,12 +48,12 @@ export class ChangeAssetStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Selected Asset ID:", this.selectedAssetId);
     this.fetchAssetsId();
   }
 
   fetchAssetsId() {
     this.apiservice.getAssetId().subscribe((data: any) => {
+      console.log(data);
       this.assetID = data;
     }, error => {
       console.error("Error Fetching AssetID", error)
