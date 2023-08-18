@@ -24,7 +24,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatCardModule} from "@angular/material/card";
 import {MatSelectModule} from "@angular/material/select";
@@ -37,33 +37,33 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     ChangeAssetStatusComponent,
     NavbarComponent
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
-    MatIconModule,
-    FormsModule,
-    RouterModule.forRoot([
-      {path: 'asset-maintenance', component: ScheduleMaintenanceComponent},
-      {path: 'change-asset-status', component: ChangeAssetStatusComponent}
-    ]),
-    BrowserAnimationsModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    MatExpansionModule,
-    MatTooltipModule,
-    MatMenuModule,
-    MatTableModule,
-    MatSlideToggleModule,
-    MatPaginatorModule,
-    MatInputModule,
-    MatDatepickerModule, MatAutocompleteModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
+        MatIconModule,
+        FormsModule,
+        RouterModule.forRoot([
+            {path: 'asset-maintenance', component: ScheduleMaintenanceComponent},
+            {path: 'change-asset-status', component: ChangeAssetStatusComponent}
+        ]),
+        BrowserAnimationsModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        MatListModule,
+        MatExpansionModule,
+        MatTooltipModule,
+        MatMenuModule,
+        MatTableModule,
+        MatSlideToggleModule,
+        MatPaginatorModule,
+        MatInputModule,
+        MatDatepickerModule, MatAutocompleteModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatRippleModule
+    ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
 })
