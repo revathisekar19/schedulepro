@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from './api.service';
-import { HttpClient } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {AssetApiService} from './services/asset-api.service';
+import {HttpClient} from '@angular/common/http';
 import {DatePipe} from "@angular/common";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  // @ViewChild('sidenav') private sidenav: MatSidenav;
+  isExpanded = true;
+  showSubmenu: boolean = false;
+  isShowing = false;
+  showSubSubMenu: boolean = false;
+
   title = 'schedulepro';
   //selectedAssetId: any
   assetIds: any;
@@ -19,8 +26,20 @@ export class AppComponent implements OnInit {
   assetID: any;
   currentDate = new Date();
 
-  constructor(private apiservice: ApiService, private http: HttpClient,private datePipe : DatePipe,private modalService: NgbModal) {
+  constructor(private apiservice: AssetApiService, private http: HttpClient, private datePipe: DatePipe) {
     this.scheduleMaintenance();
+  }
+
+  mouseenter() {
+    if (!this.isExpanded) {
+      this.isShowing = true;
+    }
+  }
+
+  mouseleave() {
+    if (!this.isExpanded) {
+      this.isShowing = false;
+    }
   }
 
   ngOnInit() {
@@ -42,14 +61,14 @@ export class AppComponent implements OnInit {
   scheduleMaintenance() {
     const maintenanceDetails = {
       assetId: this.selectedAssetId,
-      startDate: this.datePipe.transform(this.startDate,'yyyy-MM-dd'),
-      stopDate: this.datePipe.transform(this.stopDate,'yyyy-MM-dd')
+      startDate: this.datePipe.transform(this.startDate, 'yyyy-MM-dd'),
+      stopDate: this.datePipe.transform(this.stopDate, 'yyyy-MM-dd')
     };
 
     this.apiservice.scheduleMaintenance(maintenanceDetails)
       .subscribe(
         (res) => {
-          console.log('Maintenance scheduled successfully.',res);
+          console.log('Maintenance scheduled successfully.', res);
         },
         (error) => {
           console.error('Error scheduling maintenance:', error);
@@ -62,7 +81,7 @@ export class AppComponent implements OnInit {
     this.apiservice.changeAssetStatus(assetId, active).subscribe(
       (res) => {
         alert('Asset status changed successfully');
-        console.log('Asset status changed successfully',res);
+        console.log('Asset status changed successfully', res);
       },
       (error) => {
         alert('Error changing asset status')

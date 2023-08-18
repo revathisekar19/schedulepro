@@ -1,34 +1,47 @@
-<div class="container">
-  <div class="title">
-    <h1>Maintenance Scheduling</h1>
-  </div>
-  <form #mainForm="ngForm" (ngSubmit)="scheduleMaintenance()" >
-    <div class="row g-3">
-      <div class="col-sm-3">
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ selectedAssetId ? selectedAssetId : 'Select an Asset Id' }}
-          </button>
-          <ul class="dropdown-menu">
-            <li *ngFor="let data of assetIds">
-              <a class="dropdown-item" (click)="selectAssetId(data)">{{ data }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm">
-        <label>Select Start Date:</label>
-        <input type="date" name="startDate" id="startDate" [(ngModel)]="startDate" [min]="currentDate | date:'yyyy-MM-dd'"
-               required>
-      </div>
-      <div class="col-sm">
-        <label>Select End Date:</label>
-        <input type="date" name="stopDate" id="stopDate" [(ngModel)]="stopDate" [min]="currentDate | date:'yyyy-MM-dd'"
-               required>
-      </div>
+<section>
+  <mat-card-header>
+    <mat-card-title>Schedule Maintenance for a boat</mat-card-title>
+    <mat-card-content>Maintenance Scheduling</mat-card-content>
+  </mat-card-header>
+</section>
+<form (ngSubmit)="scheduleMaintenance()" class="schedule-maintenance-form">
+  <!--  Asset Name-->
+  <section>
+    <mat-form-field>
+      <mat-label>Select an asset</mat-label>
+      <mat-select required [(ngModel)]="selectedAsset" name="food">
+        <mat-option *ngFor="let asset of assets" [value]="asset.assetName">
+          {{asset.assetName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!--Maintenance Date Field-->
+    <mat-form-field>
+      <mat-label>Select Maintenance Date</mat-label>
+      <mat-date-range-input required [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date">
+        <input matEndDate formControlName="end" placeholder="End date">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+    </mat-form-field>
+
+  </section>
+  <section>
+    <div>
+      <button mat-raised-button color="primary" type="submit" class="btn btn-primary" id="submit"><mat-icon>check</mat-icon>Submit</button>
+      <button mat-raised-button color="warn" type="reset" class="btn btn-secondary" id="reset"><mat-icon>cancel</mat-icon>Reset</button>
     </div>
-    <button type="submit" class="btn btn-primary" id="sub">Submit</button>
-    <button type="reset" class="btn btn-secondary" id="res">Reset</button>
-  </form>
-</div>
+  </section>
+</form>
+
+<mat-divider></mat-divider>
+<section>
+  <p> Selected asset: {{selectedAsset}} </p>
+  <p>Selected range: {{range.value | json}}</p>
+</section>
+
+
 

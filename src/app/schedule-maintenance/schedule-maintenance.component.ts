@@ -1,14 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { AssetApiService } from '../services/asset-api.service';
 import { HttpClient } from '@angular/common/http';
 import {DatePipe} from "@angular/common";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 
+const ELEMENT_DATA: AssetStatus[] = [{assetId: 1300155, assetName: 'MV Heavy Lane', status: true}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
+];
+export interface AssetStatus {
+  assetId: number;
+  assetName: string;
+  status: boolean;
+}
 @Component({
   selector: 'app-schedule-maintenance',
   templateUrl: './schedule-maintenance.component.html',
-  styleUrls: ['./schedule-maintenance.component.css']
+  styleUrls: ['./schedule-maintenance.component.css'],
+
 })
 
 export class ScheduleMaintenanceComponent implements OnInit {
@@ -18,7 +42,17 @@ export class ScheduleMaintenanceComponent implements OnInit {
   stopDate: any;
   assetID: any;
   currentDate = new Date();
-  constructor(private apiservice: ApiService, private http: HttpClient,private datePipe : DatePipe,private modalService: NgbModal) {
+  options: string[] = ['One', 'Two', 'Three', 'Four', 'Five'];
+  filteredOptions: string[];
+  selectedAsset : number | undefined
+  assets = ELEMENT_DATA;
+
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+  constructor(private apiservice: AssetApiService, private http: HttpClient, private datePipe : DatePipe) {
+    this.filteredOptions = this.options.slice();
     this.scheduleMaintenance();
   }
 
@@ -35,6 +69,7 @@ export class ScheduleMaintenanceComponent implements OnInit {
       }
     );
   }
+
 
   scheduleMaintenance() {
     const maintenanceDetails = {
