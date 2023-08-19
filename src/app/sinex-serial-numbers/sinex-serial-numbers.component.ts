@@ -13,9 +13,7 @@ export class SinexSerialNumbersComponent {
       if (this.selectedFile.type !== 'text/csv') {
         this.errorMessage = 'Only CSV files are allowed.';
       } else {
-        // Here, you can proceed with uploading the file.
-        // Reset error message.
-        this.errorMessage = null;
+        this.errorMessage = 'File Uploaded';
       }
     }
   }
