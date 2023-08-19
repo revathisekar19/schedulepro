@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./sinex-serial-numbers.component.css']
 })
 export class SinexSerialNumbersComponent {
-
+  selectedFile: File | null = null;
+  errorMessage: string | null = null;
+  uploadFile() {
+    if (this.selectedFile) {
+      if (this.selectedFile.type !== 'text/csv') {
+        this.errorMessage = 'Only CSV files are allowed.';
+      } else {
+        // Here, you can proceed with uploading the file.
+        // Reset error message.
+        this.errorMessage = null;
+      }
+    }
+  }
 }

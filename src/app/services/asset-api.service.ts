@@ -7,7 +7,7 @@ import {AssetStatus} from "../change-asset-status/change-asset-status.component"
   providedIn: 'root'
 })
 export class AssetApiService {
-  private baseUrl = '/api/v1/assets';
+  private baseUrl = '/api/v1/assets-status';
   private username = 'bsmuser';
   private password = 'test';
   constructor(private http: HttpClient) {

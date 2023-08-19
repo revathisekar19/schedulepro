@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import {ScheduleMaintenanceComponent} from './schedule-maintenance/schedule-maintenance.component';
@@ -34,7 +34,9 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SinexSerialNumbersComponent } from './sinex-serial-numbers/sinex-serial-numbers.component';
 import {MatTabsModule} from "@angular/material/tabs";
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {LoaderInterceptorService} from "./http-interceptor/loader-interceptor.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     NavbarComponent,
     HomeComponent,
     NotFoundComponent,
-    SinexSerialNumbersComponent
+    SinexSerialNumbersComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
+    MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,MatProgressBarModule,MatProgressSpinnerModule,
     MatIconModule,
     FormsModule,
     RouterModule.forRoot([
@@ -76,7 +78,14 @@ import {MatTabsModule} from "@angular/material/tabs";
     MatInputModule,
     MatDatepickerModule, MatAutocompleteModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatRippleModule, MatSortModule, MatTabsModule
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:LoaderInterceptorService,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

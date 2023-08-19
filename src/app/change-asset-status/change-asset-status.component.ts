@@ -3,13 +3,14 @@ import {AssetApiService} from "../services/asset-api.service";
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {elementAt} from "rxjs";
+// import {SpinnerService} from "../services/spinner.service";
 
 
 export interface AssetStatus {
   assetId: number;
   assetName: string;
   status: boolean;
+  loading: boolean; // New property to track loading state
 }
 
 @Component({
@@ -32,8 +33,6 @@ export class ChangeAssetStatusComponent implements OnInit {
     this.dataSource = new MatTableDataSource();
 
   }
-
-
   ngOnInit() {
     this.getAssetStatusFromServer();
   }
@@ -49,16 +48,24 @@ export class ChangeAssetStatusComponent implements OnInit {
   }
 
   changeAssetStatus(newStatus: boolean, asset: AssetStatus) {
+    // Set loading to true while waiting for the API response
+    asset.loading = true;
     const originalStatus = asset.status;
     const assetId = asset.assetId;
     const active = newStatus;
+
     console.log("Selected Asset ID:", asset.assetId);
     console.log("New Status:", newStatus);
     this.apiservice.changeAssetStatus(assetId, newStatus).subscribe(
       (res) => {
+        // Update the loading property after receiving the response
+        asset.loading = false;
+
         // this.assetID = res.map(data => data.assetId);
       },
       (error) => {
+        asset.loading = false; // Ensure loading is reset even on error
+
         console.error('Error changing asset status', error);
       }
     );
