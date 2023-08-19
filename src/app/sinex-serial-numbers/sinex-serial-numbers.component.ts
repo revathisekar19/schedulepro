@@ -7,12 +7,8 @@ import { Component } from '@angular/core';
 })
 export class SinexSerialNumbersComponent {
   selectedFile: File | null = null;
-  errorMessage: string | null = null;
+  message: string | null = null;
   uploadFile() {
-    if (this.selectedFile) {
-      if (this.selectedFile.type !== 'text/csv') {
-        this.errorMessage = 'Only CSV files are allowed.';
-      }
-    }
+    this.message = 'File Uploaded';
   }
 }

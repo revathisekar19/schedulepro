@@ -1,4 +1,4 @@
 
 <input type="file"  accept="text/csv" [(ngModel)]="selectedFile">
 <button (click)="uploadFile()">Upload</button>
-<p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+<p *ngIf="message" class="error-message">{{ message }}</p>
