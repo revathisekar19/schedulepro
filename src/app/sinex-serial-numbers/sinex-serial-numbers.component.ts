@@ -13,8 +13,10 @@ export class SinexSerialNumbersComponent {
       if (this.selectedFile.type !== 'text/csv') {
         this.errorMessage = 'Only CSV files are allowed.';
       } else {
-        this.errorMessage = 'File Uploaded';
+        this.errorMessage = null;
       }
+    }else {
+      this.errorMessage= ' file uploaded';
     }
   }
 }
