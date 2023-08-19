@@ -1,6 +1,6 @@
 {
-  "/api/**": {
-    "target": "https://bsm.canalbarge.com",
+  "/api/*": {
+    "target": "http://localhost:8080",
     "secure": false,
     "changeOrigin": true
   }

@@ -2,18 +2,30 @@
   <button (click)="drawer.toggle()" mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Boat System Monitoring</span>
+  <span> <button  mat-mini-fab style="margin-right: 10% ; margin-left: 10%" >
+          <mat-icon>directions_boat</mat-icon>
+        </button>Boat System Monitoring UI</span>
   <span class="example-spacer"></span>
 </mat-toolbar>
 <mat-drawer-container  autosize>
+
+
   <mat-drawer #drawer opened="true" mode="side" position="start" >
     <mat-nav-list>
+      <mat-list-item>
+        <button routerLink="/home" mat-button><mat-icon>home</mat-icon>Home</button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
       <mat-list-item>
         <button routerLink="/change-asset-status" mat-button><mat-icon>directions_boat</mat-icon>Change Asset Status</button>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
-        <button routerLink="/asset-maintenance" mat-button><mat-icon>schedule</mat-icon>Schedule Maintenance</button>
+        <button routerLink="/asset-maintenance" mat-button><mat-icon>today</mat-icon>Schedule Maintenance</button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <button routerLink="/sinex-serial-number" mat-button><mat-icon>settings</mat-icon>Sinex Serial Numbers</button>
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-nav-list>

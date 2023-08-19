@@ -1,7 +1,9 @@
-import {AfterViewInit, Component, NgModule, OnInit, ViewChild} from '@angular/core';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AssetApiService} from "../services/asset-api.service";
-import {MatTableModule} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {elementAt} from "rxjs";
 
 
 export interface AssetStatus {
@@ -9,26 +11,6 @@ export interface AssetStatus {
   assetName: string;
   status: boolean;
 }
-
-const ELEMENT_DATA: AssetStatus[] = [{assetId: 1300155, assetName: 'MV Heavy Lane', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-  , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-];
 
 @Component({
   selector: 'app-change-asset-status',
@@ -39,30 +21,35 @@ const ELEMENT_DATA: AssetStatus[] = [{assetId: 1300155, assetName: 'MV Heavy Lan
 
 export class ChangeAssetStatusComponent implements OnInit {
 
+  dataSource: MatTableDataSource<AssetStatus>;
   displayedColumns: string[] = ['assetId', 'assetName', 'status'];
-  dataSource = ELEMENT_DATA;
-  assetID: number[] = [];
-  selectedAssetId: any;
-  assetStatus: boolean = true;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
 
   constructor(private apiservice: AssetApiService) {
+    this.dataSource = new MatTableDataSource();
+
   }
+
 
   ngOnInit() {
-    console.log("Selected Asset ID:", this.selectedAssetId);
-    this.fetchAssetsId();
+    this.getAssetStatusFromServer();
   }
 
-  fetchAssetsId() {
-    this.apiservice.getAssetId().subscribe((data: any) => {
-      this.assetID = data;
+  getAssetStatusFromServer() {
+    this.apiservice.getAssetStatus().subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }, error => {
       console.error("Error Fetching AssetID", error)
     })
   }
 
   changeAssetStatus(newStatus: boolean, asset: AssetStatus) {
-
+    const originalStatus = asset.status;
     const assetId = asset.assetId;
     const active = newStatus;
     console.log("Selected Asset ID:", asset.assetId);
@@ -77,5 +64,8 @@ export class ChangeAssetStatusComponent implements OnInit {
     );
   }
 
-
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
