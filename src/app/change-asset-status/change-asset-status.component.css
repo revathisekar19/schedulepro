@@ -1,12 +1,30 @@
-.container{
-  padding-top: 40px;
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
 }
-.title{
-  padding-bottom: 20px;
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
 }
-#assetID{
-  margin-bottom: 20px;
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
 }
-.form-check-label{
-  margin-bottom: 20px;
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+/* Add this to your component's CSS or global styles */
+.toggle-container {
+  display: flex;
+  align-items: center; /* Align spinner and toggle vertically */
+}
+
+.mat-slide-toggle {
+  margin-right: 10px; /* Add space between toggle and spinner */
 }

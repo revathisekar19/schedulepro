@@ -1,34 +1,40 @@
-<section>
-  <mat-card style="margin: 1% 6% 3%;">
-    <button color="accent" mat-raised-button (click)="fetchAssetsId()">Change Status of an Asset</button>
-  </mat-card>
-</section>
+<div class="example-container mat-elevation-z8">
+  <mat-form-field>
+    <mat-label>Search asset</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+  </mat-form-field>
+</div>
+<div class="example-container mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="assetId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Asset Id</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.assetId}} </mat-cell>
+    </ng-container>
 
-<div style="margin: 0% 1% 4% 4%;">
-<table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-<!--  Asset column -->
-  <ng-container matColumnDef="assetId">
-    <th mat-header-cell *matHeaderCellDef> Asset Id</th>
-    <td mat-cell *matCellDef="let element "> {{element.assetId}} </td>
-  </ng-container>
-<!-- Name Column -->
-  <ng-container matColumnDef="assetName">
-    <th mat-header-cell *matHeaderCellDef> Asset Name</th>
-    <td mat-cell *matCellDef="let element">
-      <mat-icon> directions_boat</mat-icon>
-      <span>&nbsp;</span>{{element.assetName}} </td>
-  </ng-container>
-<!-- Status Column -->
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> Status</th>
-    <!--    <td mat-cell *matCellDef="let element"> {{element.status}}</td>-->
-    <td mat-cell *matCellDef="let element">
-      <mat-slide-toggle color="accent" (ngModelChange)="changeAssetStatus($event , element)"
-                        [(ngModel)]="element.status">{{element.status ? 'Active' : 'Inactive'}}</mat-slide-toggle>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="assetName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Asset Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-icon> directions_boat</mat-icon>
+        <span>&nbsp;</span>{{element.assetName}} </mat-cell>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
-</table>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Status</mat-header-cell>
+      <!--    <td mat-cell *matCellDef="let element"> {{element.status}}</td>-->
+      <mat-cell *matCellDef="let element">
+        <mat-spinner style="margin-right: 10px" color="accent" *ngIf="true" diameter="2
+
+          love
+          0"></mat-spinner>
+        <mat-slide-toggle color="accent" (ngModelChange)="changeAssetStatus($event , element)"
+                          [(ngModel)]="element.status">{{element.status ? 'Active' : 'Inactive'}}</mat-slide-toggle>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[7, 10, 25, 50]" [pageSize]="7"></mat-paginator>
+
 </div>

@@ -4,25 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import {DatePipe} from "@angular/common";
 import {FormControl, FormGroup} from "@angular/forms";
 
-// const ELEMENT_DATA: AssetStatus[] = [{assetId: 1300155, assetName: 'MV Heavy Lane', status: true}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: true}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-//   , {assetId: 562115, assetName: 'MV Eugiene Jones', status: false}
-// ];
+
 const ELEMENT_DATA: AssetStatus[]=[];
 export interface AssetStatus {
   assetId: number;
@@ -36,7 +18,7 @@ export interface AssetStatus {
 
 })
 
-export class ScheduleMaintenanceComponent {
+export class ScheduleMaintenanceComponent implements  OnInit{
   assetIds: any[] = [];
   selectedAssetId: number | undefined;
   // assetID: any;
@@ -50,14 +32,11 @@ export class ScheduleMaintenanceComponent {
   });
   constructor(private apiservice: AssetApiService, private http: HttpClient, private datePipe : DatePipe) {
     this.filteredOptions = this.options.slice();
-    this.getAssetIds();
-    this.scheduleMaintenance();
+
+
   }
-  // selectAssetId(assetId: string) {
-  //   this.selectedAssetId = assetId;
-  // }
   getAssetIds() {
-    this.apiservice.getAssetId().subscribe(
+    this.apiservice.getAssetStatus().subscribe(
       (data: any) => {
         this.assetIds = data;
       }
@@ -65,9 +44,7 @@ export class ScheduleMaintenanceComponent {
   }
   onAssetSelected() {
     const selectedAssetName = this.selectedAsset;
-
     const selectedAsset = this.assetIds.find(asset => asset.assetName === selectedAssetName);
-
     if (selectedAsset) {
       this.selectedAssetId = selectedAsset.assetId;
     } else {
@@ -92,6 +69,10 @@ export class ScheduleMaintenanceComponent {
           console.error('Error scheduling maintenance:', error);
         }
       );
+  }
+
+  ngOnInit(): void {
+    this.getAssetIds();
   }
 }
 
