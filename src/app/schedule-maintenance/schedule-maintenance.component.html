@@ -1,51 +1,21 @@
-<mat-card>
-  <mat-card-title style="margin-top: 20px"> Assets in maintenance are not polled and alerts are deactivated
-  </mat-card-title>
-  <mat-card-content>
-    <form (ngSubmit)="scheduleMaintenance()" class="schedule-maintenance-form">
-      <!--  Asset Name-->
-      <p style="margin: 10px 50px ">
-        <mat-form-field appearance="outline" style="margin: 5%">
-          <mat-label>Select an asset</mat-label>
-          <mat-select required [(ngModel)]="selectedAsset" name="food" (selectionChange)="onAssetSelected()">
-            <mat-option *ngFor="let asset of assetIds" [value]="asset.assetName">
-              {{asset.assetName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+<mat-tab-group dynamicHeight>
+  <mat-tab label="First">
+    <ng-template mat-tab-label>
+      <mat-icon style="margin-right: 8px">calendar_today</mat-icon>
+      View Upcoming Maintenances
+    </ng-template>
+    <app-schedule-maintenance-view-all></app-schedule-maintenance-view-all>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon style="margin-right: 8px">schedule</mat-icon>
+      Create new Schedule
+    </ng-template>
+    <app-schedule-maintenance-add-new></app-schedule-maintenance-add-new>
+  </mat-tab>
+</mat-tab-group>
 
-        <!--Maintenance Date Field-->
 
-        <mat-form-field appearance="outline">
-          <mat-label>Select Maintenance Date</mat-label>
-          <mat-date-range-input required [formGroup]="range" [rangePicker]="picker">
-            <input matStartDate formControlName="start" placeholder="Start date" value="start">
-            <input matEndDate formControlName="end" placeholder="End date" value="end">
-          </mat-date-range-input>
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-          <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-          <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid End date</mat-error>
-        </mat-form-field>
-      </p>
-
-      <section>
-        <div>
-          <button style="margin:  0 10px" mat-raised-button color="primary" type="submit" class="btn btn-primary"
-                  id="submit">
-            <mat-icon>check</mat-icon>
-            Submit
-          </button>
-          <button style="margin:  0 10px" mat-raised-button color="warn" type="reset" class="btn btn-secondary"
-                  id="reset">
-            <mat-icon>cancel</mat-icon>
-            Reset
-          </button>
-        </div>
-      </section>
-    </form>
-  </mat-card-content>
-</mat-card>
 
 
 

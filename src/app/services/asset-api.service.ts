@@ -2,12 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AssetStatus} from "../change-asset-status/change-asset-status.component";
+import {MaintenanceHistory} from "../schedule-maintenance/schedule-maintenance.component";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssetApiService {
-  private baseUrl = '/api/v1/assets-status';
+  private assetsUrl = '/api/v1/assets';
+  private maintenanceUrl = '/api/v1/maintenance';
   private username = 'bsmuser';
   private password = 'test';
   constructor(private http: HttpClient) {
@@ -17,17 +19,32 @@ export class AssetApiService {
     const headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
     });
-    return this.http.get<AssetStatus[]>(this.baseUrl, {headers});
+    return this.http.get<AssetStatus[]>(this.assetsUrl, {headers});
+  }
+
+  getMaintenance() {
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
+    });
+    return this.http.get<MaintenanceHistory[]>(this.maintenanceUrl, {headers});
+  }
+
+  deleteMaintenance(id : String) {
+    const url = this.maintenanceUrl+`/'+${id}`;
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
+    });
+    return this.http.delete<String>(url, {headers});
   }
 
   scheduleMaintenance(maintenanceDetails: any) {
-    const baseUrl = `/api/v1/maintenance/${maintenanceDetails.assetIds}/${maintenanceDetails.startDate}/${maintenanceDetails.endDate}`;
+    const url = this.maintenanceUrl+`/${maintenanceDetails.assetIds}/${maintenanceDetails.startDate}/${maintenanceDetails.endDate}`;
 
     const headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
     });
 
-    return this.http.post(baseUrl, {}, {headers});
+    return this.http.post(url, {}, {headers});
   }
 
   changeAssetStatus(assetId: number, active: boolean): Observable<any> {

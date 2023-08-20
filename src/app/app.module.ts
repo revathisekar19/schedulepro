@@ -37,6 +37,9 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {LoaderInterceptorService} from "./http-interceptor/loader-interceptor.service";
+import { ScheduleMaintenanceAddNewComponent } from './schedule-maintenance-add-new/schedule-maintenance-add-new.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import { ScheduleMaintenanceViewAllComponent } from './schedule-maintenance-view-all/schedule-maintenance-view-all.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +49,9 @@ import {LoaderInterceptorService} from "./http-interceptor/loader-interceptor.se
     HomeComponent,
     NotFoundComponent,
     SinexSerialNumbersComponent,
+    ScheduleMaintenanceComponent,
+    ScheduleMaintenanceAddNewComponent,
+    ScheduleMaintenanceViewAllComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,7 @@ import {LoaderInterceptorService} from "./http-interceptor/loader-interceptor.se
     HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,MatProgressBarModule,MatProgressSpinnerModule,
+    MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatProgressBarModule, MatProgressSpinnerModule,
     MatIconModule,
     FormsModule,
     RouterModule.forRoot([
@@ -76,7 +82,7 @@ import {LoaderInterceptorService} from "./http-interceptor/loader-interceptor.se
     MatSlideToggleModule,
     MatPaginatorModule,
     MatInputModule,
-    MatDatepickerModule, MatAutocompleteModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatRippleModule, MatSortModule, MatTabsModule
+    MatDatepickerModule, MatAutocompleteModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatRippleModule, MatSortModule, MatTabsModule, MatGridListModule
   ],
   providers: [
     DatePipe,

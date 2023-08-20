@@ -3,14 +3,14 @@ import {AssetApiService} from "../services/asset-api.service";
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-// import {SpinnerService} from "../services/spinner.service";
+
 
 
 export interface AssetStatus {
   assetId: number;
   assetName: string;
   status: boolean;
-  loading: boolean; // New property to track loading state
+  loading: boolean;
 }
 
 @Component({

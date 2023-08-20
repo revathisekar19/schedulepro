@@ -1,16 +1,33 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { AssetApiService } from '../services/asset-api.service';
-import { HttpClient } from '@angular/common/http';
+import {AssetApiService} from '../services/asset-api.service';
+import {HttpClient} from '@angular/common/http';
 import {DatePipe} from "@angular/common";
 import {FormControl, FormGroup} from "@angular/forms";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatTabChangeEvent} from "@angular/material/tabs";
 
 
-const ELEMENT_DATA: AssetStatus[]=[];
+const ELEMENT_DATA: AssetStatus[] = [];
+
 export interface AssetStatus {
+
+
   assetId: number;
   assetName: string;
   status: boolean;
+
+
 }
+
+
+export interface MaintenanceHistory {
+  id: String;
+  parentAssetId: number;
+  maintenanceStartTime: string;
+  maintenanceStopTime: string;
+  state: string;
+}
+
 @Component({
   selector: 'app-schedule-maintenance',
   templateUrl: './schedule-maintenance.component.html',
@@ -18,23 +35,25 @@ export interface AssetStatus {
 
 })
 
-export class ScheduleMaintenanceComponent implements  OnInit{
+export class ScheduleMaintenanceComponent implements OnInit {
   assetIds: any[] = [];
   selectedAssetId: number | undefined;
-  // assetID: any;
-  currentDate = new Date();
   options: string[] = ['One', 'Two', 'Three', 'Four', 'Five'];
   filteredOptions: string[];
-  selectedAsset : any;
+  selectedAsset: any;
   range = new FormGroup({
-    start: new FormControl<Date|number | string>(new Date()),
-    end: new FormControl<Date|number | string>(new Date()),
+    start: new FormControl<Date | number | string>(new Date()),
+    end: new FormControl<Date | number | string>(new Date()),
   });
-  constructor(private apiservice: AssetApiService, private http: HttpClient, private datePipe : DatePipe) {
-    this.filteredOptions = this.options.slice();
+  dataSource: MatTableDataSource<MaintenanceHistory>;
+  displayedColumns: string[] = ['id', 'parentAssetId', 'maintenanceStartTime', 'maintenanceStopTime' , 'state'];
 
+  constructor(private apiservice: AssetApiService, private http: HttpClient, private datePipe: DatePipe) {
+    this.filteredOptions = this.options.slice();
+    this.dataSource = new MatTableDataSource();
 
   }
+
   getAssetIds() {
     this.apiservice.getAssetStatus().subscribe(
       (data: any) => {
@@ -42,6 +61,7 @@ export class ScheduleMaintenanceComponent implements  OnInit{
       }
     );
   }
+
   onAssetSelected() {
     const selectedAssetName = this.selectedAsset;
     const selectedAsset = this.assetIds.find(asset => asset.assetName === selectedAssetName);
@@ -51,28 +71,11 @@ export class ScheduleMaintenanceComponent implements  OnInit{
       this.selectedAssetId = undefined;
     }
   }
-  scheduleMaintenance() {
-    const startDate = this.range.controls.start.value;
-    const endDate = this.range.controls.end.value;
-    const maintenanceDetails = {
-      assetIds: this.selectedAssetId,
-      startDate: this.datePipe.transform(startDate, 'yyyy-MM-dd'),
-      endDate: this.datePipe.transform(endDate, 'yyyy-MM-dd')
-    };
 
-    this.apiservice.scheduleMaintenance(maintenanceDetails)
-      .subscribe(
-        (res) => {
-          console.log('Maintenance scheduled successfully.', res);
-        },
-        (error) => {
-          console.error('Error scheduling maintenance:', error);
-        }
-      );
-  }
 
   ngOnInit(): void {
     this.getAssetIds();
   }
+
 }
 

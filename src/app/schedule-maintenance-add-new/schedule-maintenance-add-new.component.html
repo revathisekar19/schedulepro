@@ -1,0 +1,48 @@
+<mat-card>
+  <mat-card-subtitle  style="margin-top: 20px ;color: orange"> Important!: While in maintenance mode polling and alerts are temporarily suspended for the asset.
+  </mat-card-subtitle>
+  <mat-card-content>
+    <form (ngSubmit)="scheduleMaintenance()" class="schedule-maintenance-form">
+      <!--  Asset Name-->
+      <p style="margin: 10px 50px ">
+        <mat-form-field appearance="outline" style="margin: 5%">
+          <mat-label>Asset Name</mat-label>
+          <mat-select required [(ngModel)]="selectedAsset" name="food" (selectionChange)="onAssetSelected()">
+            <mat-option *ngFor="let asset of assetStatus" [value]="asset.assetName">
+              {{asset.assetName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!--Maintenance Date Field-->
+
+        <mat-form-field appearance="outline">
+          <mat-label>Select Maintenance Date</mat-label>
+          <mat-date-range-input required [formGroup]="range" [rangePicker]="picker">
+            <input matStartDate formControlName="start" placeholder="Start date" value="start">
+            <input matEndDate formControlName="end" placeholder="End date" value="end">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+          <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid End date</mat-error>
+        </mat-form-field>
+      </p>
+
+      <section>
+        <div>
+          <button style="margin:  0 10px" mat-raised-button color="primary" type="submit" class="btn btn-primary"
+                  id="submit">
+            <mat-icon>check</mat-icon>
+            Submit
+          </button>
+          <button style="margin:  0 10px" mat-raised-button color="warn" type="reset" class="btn btn-secondary"
+                  id="reset">
+            <mat-icon>cancel</mat-icon>
+            Reset
+          </button>
+        </div>
+      </section>
+    </form>
+  </mat-card-content>
+</mat-card>
