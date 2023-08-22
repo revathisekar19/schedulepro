@@ -3,8 +3,10 @@ import {AssetApiService} from '../services/asset-api.service';
 import {HttpClient} from '@angular/common/http';
 import {DatePipe} from "@angular/common";
 import {FormControl, FormGroup} from "@angular/forms";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatTabGroup} from "@angular/material/tabs";
+import {isScheduler} from "rxjs/internal/util/isScheduler";
 export interface AssetStatus {
   assetId: number;
   assetName: string;
@@ -28,7 +30,10 @@ export class ScheduleMaintenanceAddNewComponent implements OnInit {
     end: new FormControl<Date | number | string>(new Date()),
   });
 
-  constructor(private apiservice: AssetApiService, private http: HttpClient, private datePipe: DatePipe) {
+  constructor(private apiservice: AssetApiService,
+              private http: HttpClient,
+              private datePipe: DatePipe,
+              private snackBar: MatSnackBar) {
     this.filteredOptions = this.assetStatus.slice();
   }
 
@@ -69,11 +74,16 @@ export class ScheduleMaintenanceAddNewComponent implements OnInit {
         }
       );
   }
-
   ngOnInit(): void {
     this.getAssetIds();
   }
-
+  openSnack(){
+    if(this.selectedAsset != null){
+    this.snackBar.open('Scheduled','close');}
+  }
+  openSnackBar(){
+    this.snackBar.open('Canceled','close');
+  }
 }
 
 

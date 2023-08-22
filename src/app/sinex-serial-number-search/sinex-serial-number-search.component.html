@@ -1,0 +1,37 @@
+<div class="example-container mat-elevation-z8"><mat-form-field>
+  <mat-label >Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="AssetID" style="">
+</mat-form-field> </div>
+<button style="position: absolute;top: 10px;right: 0;min-width: 10% ;color: whitesmoke" mat-raised-button color="accent" (click)="ngOnInit()">
+  <mat-icon  color="primary">refresh</mat-icon> Refresh Table</button>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Asset ID Column -->
+  <ng-container matColumnDef="assetID">
+    <th mat-header-cell *matHeaderCellDef>Asset ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.assetID }}</td>
+  </ng-container>
+
+  <!-- Asset Group Name Column -->
+  <ng-container matColumnDef="assetGroupName">
+    <th mat-header-cell *matHeaderCellDef>Asset Group Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.assetGroupName }}</td>
+  </ng-container>
+
+  <!-- Serial Number Column -->
+  <ng-container matColumnDef="serialNo">
+    <th mat-header-cell *matHeaderCellDef>Serial Number</th>
+    <td mat-cell *matCellDef="let element">{{ element.serialNo }}</td>
+  </ng-container>
+
+  <!-- Define columns -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[7, 10, 25, 50]" [pageSize]="7"></mat-paginator>

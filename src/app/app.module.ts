@@ -40,6 +40,9 @@ import {LoaderInterceptorService} from "./http-interceptor/loader-interceptor.se
 import { ScheduleMaintenanceAddNewComponent } from './schedule-maintenance-add-new/schedule-maintenance-add-new.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import { ScheduleMaintenanceViewAllComponent } from './schedule-maintenance-view-all/schedule-maintenance-view-all.component';
+import { SinexSerialNumberUploadComponent } from './sinex-serial-number-upload/sinex-serial-number-upload.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { SinexSerialNumberSearchComponent } from './sinex-serial-number-search/sinex-serial-number-search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +55,8 @@ import { ScheduleMaintenanceViewAllComponent } from './schedule-maintenance-view
     ScheduleMaintenanceComponent,
     ScheduleMaintenanceAddNewComponent,
     ScheduleMaintenanceViewAllComponent,
+    SinexSerialNumberUploadComponent,
+    SinexSerialNumberSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,7 @@ import { ScheduleMaintenanceViewAllComponent } from './schedule-maintenance-view
     HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatProgressBarModule, MatProgressSpinnerModule,
+    MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatProgressBarModule, MatProgressSpinnerModule,MatSnackBarModule,
     MatIconModule,
     FormsModule,
     RouterModule.forRoot([

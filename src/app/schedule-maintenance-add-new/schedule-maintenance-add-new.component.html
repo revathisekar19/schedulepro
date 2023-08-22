@@ -32,12 +32,12 @@
       <section>
         <div>
           <button style="margin:  0 10px" mat-raised-button color="primary" type="submit" class="btn btn-primary"
-                  id="submit">
+                  id="submit" (click)="openSnack()">
             <mat-icon>check</mat-icon>
             Submit
           </button>
           <button style="margin:  0 10px" mat-raised-button color="warn" type="reset" class="btn btn-secondary"
-                  id="reset">
+                  id="reset" (click)="openSnackBar()">
             <mat-icon>cancel</mat-icon>
             Reset
           </button>

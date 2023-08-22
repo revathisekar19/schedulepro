@@ -3,15 +3,17 @@ import {AssetApiService} from "../services/asset-api.service";
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {Observable} from "rxjs";
+import {AssetStatus} from "../schedule-maintenance-add-new/schedule-maintenance-add-new.component";
 
 
 export interface MaintenanceHistory {
-  id: string;
+  id: string ;
   parentAssetId: number;
   assetName: string;
-  maintenanceStartTime: Date;
-  maintenanceStopTime: Date;
-  state: String;
+  maintenanceStartTime: string;
+  maintenanceStopTime: string;
+  state: string;
 }
 
 @Component({
@@ -22,10 +24,12 @@ export interface MaintenanceHistory {
 
 
 export class ScheduleMaintenanceViewAllComponent implements OnInit {
+  selectedId : any;
+  assetIds: string[] = [];
 
+  MaintenanceHistory :any[] = [];
   dataSource: MatTableDataSource<MaintenanceHistory>;
-  displayedColumns: string[] = ['parentAssetId', 'assetName', 'maintenanceStartTime', 'maintenanceStopTime','state','action'];
-
+  displayedColumns: string[] = ['parentAssetId', 'assetName', 'maintenanceStartTime', 'maintenanceStopTime', 'state', 'action'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -39,24 +43,23 @@ export class ScheduleMaintenanceViewAllComponent implements OnInit {
   }
 
   getMaintenanceFromServer() {
-    this.apiservice.getMaintenance().subscribe((data: any) => {
-
+    this.apiservice.getMaintenance().subscribe((data: MaintenanceHistory[]) => {
+      this.MaintenanceHistory = data;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }, error => {
       console.error("Error Fetching AssetID", error)
-    })
+    });
   }
 
-
   deleteMaintenance(element: MaintenanceHistory) {
+    const id = element.id;
 
-    /*
-    Pass this variable element.id
-    Call the api  DELETE /maintenance/{id}
-     */
-
+ this.apiservice.deleteMaintenance(element).subscribe((res)=>{
+   console.log(res);
+   alert('Deleted');
+ });
     this.getMaintenanceFromServer();
   }
 }

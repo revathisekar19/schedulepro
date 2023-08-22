@@ -1,4 +1,17 @@
 
-<input type="file"  accept="text/csv" [(ngModel)]="selectedFile">
-<button (click)="uploadFile()">Upload</button>
-<p *ngIf="message" class="error-message">{{ message }}</p>
+<mat-tab-group dynamicHeight>
+  <mat-tab label="First">
+    <ng-template mat-tab-label>
+      <mat-icon style="margin-right: 8px">calendar_today</mat-icon>
+      Search and Edit
+    </ng-template>
+    <app-sinex-serial-number-search></app-sinex-serial-number-search>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon style="margin-right: 8px">schedule</mat-icon>
+      Batch Upload
+    </ng-template>
+    <app-sinex-serial-number-upload></app-sinex-serial-number-upload>
+  </mat-tab>
+</mat-tab-group>
