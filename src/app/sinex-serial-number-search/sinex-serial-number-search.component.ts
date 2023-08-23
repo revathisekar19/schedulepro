@@ -20,6 +20,7 @@ export class SinexSerialNumberSearchComponent implements OnInit{
   displayedColumns: string[] = ['id','assetID', 'assetGroupName', 'serialNo'];
   dataSource: MatTableDataSource<SerialNumber>;
   assetID : any;
+  assetData : any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 constructor(private apiservice: AssetApiService) {
@@ -31,23 +32,16 @@ constructor(private apiservice: AssetApiService) {
   }
 getAssetId(){
     this.apiservice.getAssetStatus().subscribe((data)=>{
+      this.assetData = data;
       this.assetID = data.assetID;
     })
 }
-  getAssetStatusFromServer() {
-    this.apiservice.getAssetStatus().subscribe((data: any) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }, error => {
-      console.error("Error Fetching AssetID", error)
-    })
-  }
 
   getNumber(){
-    // const assetID = this.assetID;
-    let assetID  = '562115';
+    const assetID = this.assetID;
+    // let assetID  = '562115';
     this.apiservice.getSerialNumber(assetID).subscribe((res:any)=>{
+      console.log(res);
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

@@ -5,7 +5,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {Observable} from "rxjs";
 import {AssetStatus} from "../schedule-maintenance-add-new/schedule-maintenance-add-new.component";
-
+import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 
 export interface MaintenanceHistory {
   id: string ;
@@ -62,4 +62,5 @@ export class ScheduleMaintenanceViewAllComponent implements OnInit {
  });
     this.getMaintenanceFromServer();
   }
+
 }

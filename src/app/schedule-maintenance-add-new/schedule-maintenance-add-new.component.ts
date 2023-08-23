@@ -44,7 +44,6 @@ export class ScheduleMaintenanceAddNewComponent implements OnInit {
       }
     );
   }
-
   onAssetSelected() {
     const selectedAssetName = this.selectedAsset;
     const selectedAsset = this.assetStatus.find(asset => asset.assetName === selectedAssetName);

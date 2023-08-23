@@ -33,6 +33,7 @@ export class AssetApiService {
   deleteMaintenance(element : MaintenanceHistory) : Observable<any> {
     console.log('Deleting maintenance with ID:', element.id);
     const url = this.maintenanceUrl+`/${element.id}`;
+    console.log(url);
     const headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
     });

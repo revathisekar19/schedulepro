@@ -43,6 +43,8 @@ import { ScheduleMaintenanceViewAllComponent } from './schedule-maintenance-view
 import { SinexSerialNumberUploadComponent } from './sinex-serial-number-upload/sinex-serial-number-upload.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { SinexSerialNumberSearchComponent } from './sinex-serial-number-search/sinex-serial-number-search.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,38 +59,39 @@ import { SinexSerialNumberSearchComponent } from './sinex-serial-number-search/s
     ScheduleMaintenanceViewAllComponent,
     SinexSerialNumberUploadComponent,
     SinexSerialNumberSearchComponent,
+    ConfirmationDialogComponent,
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatProgressBarModule, MatProgressSpinnerModule,MatSnackBarModule,
-    MatIconModule,
-    FormsModule,
-    RouterModule.forRoot([
-      {path: '', redirectTo: '/home', pathMatch: 'full'},
-      {path: 'asset-maintenance', component: ScheduleMaintenanceComponent},
-      {path: 'sinex-serial-number', component: SinexSerialNumbersComponent},
-      {path: 'change-asset-status', component: ChangeAssetStatusComponent},
-      {path: 'home', component: HomeComponent},
-      {path: '**', component: NotFoundComponent}
-    ]),
-    BrowserAnimationsModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    MatExpansionModule,
-    MatTooltipModule,
-    MatMenuModule,
-    MatTableModule,
-    MatSlideToggleModule,
-    MatPaginatorModule,
-    MatInputModule,
-    MatDatepickerModule, MatAutocompleteModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatRippleModule, MatSortModule, MatTabsModule, MatGridListModule
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatProgressBarModule, MatProgressSpinnerModule, MatSnackBarModule,
+        MatIconModule,
+        FormsModule,
+        RouterModule.forRoot([
+            {path: '', redirectTo: '/home', pathMatch: 'full'},
+            {path: 'asset-maintenance', component: ScheduleMaintenanceComponent},
+            {path: 'sinex-serial-number', component: SinexSerialNumbersComponent},
+            {path: 'change-asset-status', component: ChangeAssetStatusComponent},
+            {path: 'home', component: HomeComponent},
+            {path: '**', component: NotFoundComponent}
+        ]),
+        BrowserAnimationsModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatIconModule,
+        MatListModule,
+        MatExpansionModule,
+        MatTooltipModule,
+        MatMenuModule,
+        MatTableModule,
+        MatSlideToggleModule,
+        MatPaginatorModule,
+        MatInputModule,
+        MatDatepickerModule, MatAutocompleteModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule, MatRippleModule, MatSortModule, MatTabsModule, MatGridListModule, MatDialogModule
+    ],
   providers: [
     DatePipe,
     {
