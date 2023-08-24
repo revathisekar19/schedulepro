@@ -38,11 +38,11 @@ export class ScheduleMaintenanceAddNewComponent implements OnInit {
   }
 
   getAssetIds() {
-    this.apiservice.getAssetStatus().subscribe(
-      (data: any) => {
+    this.apiservice.getAssetStatus().subscribe({
+      next :(data: any) => {
         this.assetStatus = data;
       }
-    );
+  });
   }
   onAssetSelected() {
     const selectedAssetName = this.selectedAsset;
@@ -64,14 +64,14 @@ export class ScheduleMaintenanceAddNewComponent implements OnInit {
     };
 
     this.apiservice.scheduleMaintenance(maintenanceDetails)
-      .subscribe(
-        (res) => {
+      .subscribe({
+        next :(res) => {
           console.log('Maintenance scheduled successfully.', res);
         },
-        (error) => {
+        error : error => {
           console.error('Error scheduling maintenance:', error);
         }
-      );
+  });
   }
   ngOnInit(): void {
     this.getAssetIds();

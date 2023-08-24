@@ -5,6 +5,7 @@ import {DatePipe} from "@angular/common";
 import {FormControl, FormGroup} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatTabChangeEvent} from "@angular/material/tabs";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 const ELEMENT_DATA: AssetStatus[] = [];
@@ -55,11 +56,12 @@ export class ScheduleMaintenanceComponent implements OnInit {
   }
 
   getAssetIds() {
-    this.apiservice.getAssetStatus().subscribe(
-      (data: any) => {
+    this.apiservice.getAssetStatus().subscribe({
+      next :(data: any) => {
         this.assetIds = data;
-      }
-    );
+      },
+      error: error=>console.log('Error Fetching',error)
+  });
   }
 
   onAssetSelected() {

@@ -43,23 +43,24 @@ export class ScheduleMaintenanceViewAllComponent implements OnInit {
   }
 
   getMaintenanceFromServer() {
-    this.apiservice.getMaintenance().subscribe((data: MaintenanceHistory[]) => {
-      this.MaintenanceHistory = data;
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }, error => {
-      console.error("Error Fetching AssetID", error)
+    this.apiservice.getMaintenance().subscribe({
+      next : (data: MaintenanceHistory[]) => {
+        this.MaintenanceHistory = data;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;},
+      error:error => console.error("Error Fetching AssetID", error)
     });
   }
 
   deleteMaintenance(element: MaintenanceHistory) {
     const id = element.id;
 
- this.apiservice.deleteMaintenance(element).subscribe((res)=>{
+ this.apiservice.deleteMaintenance(element).subscribe({
+ next :(res)=>{
    console.log(res);
    alert('Deleted');
- });
+ }});
     this.getMaintenanceFromServer();
   }
 

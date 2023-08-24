@@ -3,6 +3,7 @@ import {AssetApiService} from "../services/asset-api.service";
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 
@@ -38,12 +39,12 @@ export class ChangeAssetStatusComponent implements OnInit {
   }
 
   getAssetStatusFromServer() {
-    this.apiservice.getAssetStatus().subscribe((data: any) => {
+    this.apiservice.getAssetStatus().subscribe({
+    next:(data: any) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }, error => {
-      console.error("Error Fetching AssetID", error)
+      this.dataSource.sort = this.sort;},
+      error: error=>console.log(error)
     })
   }
 
@@ -56,19 +57,15 @@ export class ChangeAssetStatusComponent implements OnInit {
 
     console.log("Selected Asset ID:", asset.assetId);
     console.log("New Status:", newStatus);
-    this.apiservice.changeAssetStatus(assetId, newStatus).subscribe(
-      (res) => {
-        // Update the loading property after receiving the response
+    this.apiservice.changeAssetStatus(assetId, newStatus).subscribe({
+      next: (res) => {
         asset.loading = false;
-
-        // this.assetID = res.map(data => data.assetId);
       },
-      (error) => {
-        asset.loading = false; // Ensure loading is reset even on error
-
-        console.error('Error changing asset status', error);
-      }
-    );
+    error: error => {
+      asset.loading = false;
+      console.error('Error changing asset status', error);
+    }
+  })
   }
 
   applyFilter(event: Event) {

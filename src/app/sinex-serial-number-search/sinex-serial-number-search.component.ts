@@ -4,7 +4,6 @@ import {AssetApiService} from "../services/asset-api.service";
 import {AssetStatus} from "../change-asset-status/change-asset-status.component";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 export interface SerialNumber {
   id: string;
   assetID:string;
@@ -39,14 +38,15 @@ getAssetId(){
   })
 }
   getNumber(){
-    const assetID = this.assetID;
-    // let assetID  = '562115';
-    this.apiservice.getSerialNumber(assetID).subscribe((res:any)=>{
-      console.log(res);
+    // const assetID = this.assetID;
+    let assetID  = '562115';
+    this.apiservice.getSerialNumber(assetID).subscribe({
+      next :(res:any)=>{
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }),error("");
+      this.dataSource.sort = this.sort;},
+      error : error=>{console.log(error)}
+    })
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
