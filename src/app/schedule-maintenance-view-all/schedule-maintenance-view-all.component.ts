@@ -30,7 +30,7 @@ export class ScheduleMaintenanceViewAllComponent implements OnInit {
   MaintenanceHistory :any[] = [];
   dataSource: MatTableDataSource<MaintenanceHistory>;
   displayedColumns: string[] = ['parentAssetId', 'assetName', 'maintenanceStartTime', 'maintenanceStopTime', 'state', 'action'];
-
+ mainAssetID : any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -56,12 +56,12 @@ export class ScheduleMaintenanceViewAllComponent implements OnInit {
   deleteMaintenance(element: MaintenanceHistory) {
     const id = element.id;
 
- this.apiservice.deleteMaintenance(element).subscribe({
- next :(res)=>{
-   console.log(res);
-   alert('Deleted');
- }});
+    this.apiservice.deleteMaintenance(element).subscribe({
+      next :(res)=>{
+        console.log(res);
+        alert('Deleted');
+      }});
     this.getMaintenanceFromServer();
-  }
-
 }
+
+  }

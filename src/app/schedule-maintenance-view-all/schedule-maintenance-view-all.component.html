@@ -32,9 +32,10 @@
     <ng-container  matColumnDef="action">
       <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button  (click)="deleteMaintenance(element.id)" mat-icon-button >
+        <button (click)="deleteMaintenance(element)" mat-icon-button>
           <mat-icon color="accent">delete</mat-icon>
         </button>
+
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -42,3 +43,4 @@
   </mat-table>
   <mat-paginator [pageSizeOptions]="[7, 10, 25, 50]" [pageSize]="7"></mat-paginator>
 </div>
+
